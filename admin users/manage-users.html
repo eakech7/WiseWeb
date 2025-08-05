@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Users - WiseWeb</title>
+</head>
+<body>
+  <nav style="background-color: #333; padding: 10px;">
+    <div style="max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; color: white;">
+      <div style="font-size: 1.5em; font-weight: bold;">
+        WiseWeb Admin
+      </div>
+      <div>
+        <a href="admin-dashboard.html" style="color: white; text-decoration: none; margin: 0 10px;">Dashboard</a>
+        <a href="manage-users.html" style="color: white; text-decoration: none; margin: 0 10px;">Manage Users</a>
+        <a href="view-schedules.html" style="color: white; text-decoration: none; margin: 0 10px;">View Schedules</a>
+        <a href="../login.html" style="color: white; text-decoration: none; margin: 0 10px;">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div style="max-width: 1200px; margin: 40px auto;">
+    <h2>Registered Users</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Course</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dynamic content from backend -->
+        <tr>
+          <td>Jane Doe</td>
+          <td>jane@example.com</td>
+          <td>Business IT</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
