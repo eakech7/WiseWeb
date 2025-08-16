@@ -1,0 +1,101 @@
+/* Admin Dashboard CSS - WiseWeb (Pantone Light Purple Theme) */
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #D6CADD; /* Pantone 7443 C (light purple) */
+  color: #2E1A47; /* Dark plum text */
+}
+
+/* Header */
+header {
+  background: #8A7090; /* Pantone 2096 C (muted purple) */
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  background: #A398B3; /* Softer lavender */
+  padding: 12px;
+}
+
+nav a {
+  color: white;
+  margin: 0 18px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+  color: #FFD700; /* Gold accent for hover */
+  transform: scale(1.05);
+}
+
+/* Container */
+.container {
+  padding: 40px;
+  text-align: center;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-6px);
+}
+
+.card h2 {
+  margin-bottom: 12px;
+  font-size: 20px;
+  color: #6B4C7D; /* Rich purple for titles */
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #2E1A47;
+  font-weight: bold;
+  text-decoration: none;
+  border: 2px solid #6B4C7D;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.card a:hover {
+  background: #6B4C7D;
+  color: white;
+}
+
+/* Footer */
+footer {
+  background: #8A7090;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  margin-top: 40px;
+  font-size: 14px;
+}

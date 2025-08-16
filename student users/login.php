@@ -11,21 +11,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   if ($run_query) {
     if (mysqli_num_rows($run_query) > 0) {
-      $record = mysqli_fetch_assoc($run_query);
-      $password_hash = $record['password'];
+      $row = mysqli_fetch_assoc($run_query);
 
-      if (password_verify($password, $password_hash)) {
-        $_SESSION['email'] = $email;
-        header("Location: dashboard.php");
-        exit();
+      //  password_verify to handle hashed passwords
+      if (password_verify($password, $row['password'])) {
+        $_SESSION['user'] = $row;
+        header("Location: profile1.php");
+        exit;
       } else {
-        $error = "Wrong credentials";
+        $error_message = "Wrong credentials!";
       }
     } else {
-      $error = "User does not exist";
+      $error_message = "User does not exist!";
     }
   } else {
-    die(mysqli_error($connect));
+    $error_message = "Query failed: " . mysqli_error($connect);
   }
 }
 ?>
@@ -33,103 +33,35 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WiseWeb - Login</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      height: 100vh;  
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .login-container {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .login-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #667eea;
-    }
-
-    label {
-      margin-top: 15px;
-      display: block;
-      color: #333;
-    }
-
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    input[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 20px;
-      background-color: #667eea;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    input[type="submit"]:hover {
-      background-color: #4e0fa7;
-    }
-
-    .formtext {
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .formtext a {
-      color: #667eea;
-      text-decoration: none;
-    }
-
-    .error {
-      background-color: #ffdddd;
-      color: #a10000;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <div class="login-container">
-    <h2>Login to WiseWeb</h2>
+    <h2>Login</h2>
 
-    <?php if (!empty($error)) echo "<div class='error'>$error</div>"; ?>
+    <!--  Single error box for PHP + JS messages -->
+    <?php if (!empty($error_message)): ?>
+      <div id="error-message" class="error" style="color:red; margin-bottom:10px;">
+        <?php echo $error_message; ?>
+      </div>
+    <?php else: ?>
+      <div id="error-message" class="error" style="display:none; color:red; margin-bottom:10px;"></div>
+    <?php endif; ?>
 
-    <form method="post">
+    <form method="post" id="loginForm">
       <label>Email</label>
-      <input type="email" name="email" placeholder="Enter email" required>
+      <input type="email" name="email" id="email" placeholder="Enter email" required>
 
       <label>Password</label>
-      <input type="password" name="password" placeholder="Enter password" required>
+      <input type="password" name="password" id="password" placeholder="Enter password" required>
+
+      <!-- Caps Lock warning -->
+      <div id="caps-lock-warning" style="display:none; color:red; font-size:12px; margin-top:5px;">
+         Caps Lock is ON
+      </div>
 
       <input type="submit" name="login" value="Login">
 
@@ -138,5 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </form>
   </div>
 
+  <!--  Link JS at bottom -->
+  <script src="login.js"></script>
 </body>
 </html>

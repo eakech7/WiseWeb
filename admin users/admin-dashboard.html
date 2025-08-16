@@ -3,39 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <title>WiseWeb Admin Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="admin-dashboard.css">
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-brand">WiseWeb Admin</div>
-      <div class="nav-links">
-        <a href="admin-dashboard.html" class="active">Dashboard</a>
-        <a href="manage-users.html">Manage Users</a>
-        <a href="view-schedules.html">View Schedules</a>
-        <a href="../login.html">Logout</a>
-      </div>
-    </div>
+
+  <header>
+    WiseWeb Admin Dashboard
+  </header>
+
+  <nav>
+    <a href="admin-dashboard.html">Home</a>
+    <a href="manage-students.php">Manage Students</a>
+    <a href="manage-admins.php">Manage Admins</a>
+    <a href="view-logs.php">System Logs</a>
+    <a href="logout.php">Logout</a>
   </nav>
 
-  <!-- Main Content -->
-  <div class="main-container">
-    <div class="dashboard-header">
-      <h1>Welcome, Admin!</h1>
-      <p>Use this panel to manage WiseWeb users and view schedules.</p>
-    </div>
+  <div class="container">
+    <h1>Welcome, Admin</h1>
+    <p>Here are your WiseWeb management tools:</p>
 
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-number">15</div>
-        <div class="stat-label">Registered Users</div>
+    <div class="cards">
+      <div class="card">
+        <h2>Manage Students</h2>
+        <p>Add, edit, or remove student accounts.</p>
+        <a href="manage-students.php">Go →</a>
       </div>
-      <div class="stat-card">
-        <div class="stat-number">8</div>
-        <div class="stat-label">Schedules Created</div>
+
+      <div class="card">
+        <h2>Manage Admins</h2>
+        <p>Control admin accounts and permissions.</p>
+        <a href="manage-admins.php">Go →</a>
+      </div>
+
+      <div class="card">
+        <h2>System Logs</h2>
+        <p>Track login activity and important events.</p>
+        <a href="view-logs.php">Go →</a>
+      </div>
+
+      <div class="card">
+        <h2> Messages</h2>
+        <p>View and respond to messages in the system.</p>
+        <a href="messages.php">Go →</a>
+      </div>
+
+      <div class="card">
+        <h2> Settings</h2>
+        <p>Update WiseWeb system configurations.</p>
+        <a href="settings.php">Go →</a>
       </div>
     </div>
   </div>
+
+  <footer>
+    &copy; 2025 WiseWeb | Admin Panel
+  </footer>
+
 </body>
 </html>
