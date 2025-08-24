@@ -1,58 +1,112 @@
-<?php
-session_start();
-require 'db.php';
-
-// Protect page: only logged-in admins
-if (!isset($_SESSION['admin'])) {
-    header("Location: ../login.php");
-    exit;
-}
-
-// Fetch stats
-$userCountQuery = mysqli_query($conn, "SELECT COUNT(*) AS total_users FROM users");
-$userCount = mysqli_fetch_assoc($userCountQuery)['total_users'];
-
-$scheduleCountQuery = mysqli_query($conn, "SELECT COUNT(*) AS total_schedules FROM schedules");
-$scheduleCount = mysqli_fetch_assoc($scheduleCountQuery)['total_schedules'];
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>WiseWeb Admin Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="admin-dashboard.css">
 </head>
 <body>
-  <!-- Navbar -->
+
+  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-brand">WiseWeb Admin</div>
       <div class="nav-links">
         <a href="admin-dashboard.php" class="active">Dashboard</a>
-        <a href="manage-users.php">Manage Users</a>
-        <a href="view-schedules.php">View Schedules</a>
-        <a href="../logout.php">Logout</a>
+        <a href="manage-students.php">Manage Students</a>
+        <a href="view-logs.php">System Logs</a>
+        <a href="messages.php">Messages</a>
+        <a href="settings.php">Settings</a>
+        <a href="logout.php">Logout</a>
       </div>
     </div>
   </nav>
 
+  <?php
+session_start();
+if (isset($_SESSION['logout_message'])) {
+    echo "<div class='alert success'>" . $_SESSION['logout_message'] . "</div>";
+    unset($_SESSION['logout_message']); // remove after showing once
+}
+?>
+
+
+
   <!-- Main Content -->
   <div class="main-container">
+
+    <!-- Dashboard Header -->
     <div class="dashboard-header">
-      <h1>Welcome, Admin!</h1>
-      <p>Use this panel to manage WiseWeb users and view schedules.</p>
+      <h1>Welcome, Admin</h1>
+      <p>Your WiseWeb management panel</p>
     </div>
 
+    <!-- Stats Grid -->
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-number"><?= $userCount ?></div>
-        <div class="stat-label">Registered Users</div>
+        <div class="stat-number" data-target="150">0</div>
+        <div class="stat-label">Total Students</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number"><?= $scheduleCount ?></div>
-        <div class="stat-label">Schedules Created</div>
+        <div class="stat-number" data-target="5">0</div>
+        <div class="stat-label">Admins</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="42">0</div>
+        <div class="stat-label">Messages</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="97">0</div>
+        <div class="stat-label">System Uptime %</div>
       </div>
     </div>
+
+    <!-- Content Grid -->
+    <div class="content-grid">
+      <!-- Recent Activity -->
+      <div class="content-card">
+        <div class="card-header">
+          <h3 class="card-title">Recent Activity</h3>
+        </div>
+        <ul class="item-list">
+          <li>No recent activity</li>
+        </ul>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="content-card">
+        <div class="card-header">
+          <h3 class="card-title">Quick Actions</h3>
+        </div>
+        <button class="btn btn-success">Add Student</button>
+        <button class="btn btn-secondary">Add Admin</button>
+        <button class="btn">Generate Report</button>
+      </div>
+    </div>
+
   </div>
+
+  <!-- Count-Up Animation -->
+  <script>
+    const counters = document.querySelectorAll('.stat-number');
+    const speed = 200;
+
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = Math.ceil(target / speed);
+
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  </script>
+
 </body>
 </html>

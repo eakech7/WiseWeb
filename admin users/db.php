@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$dbname = "wiseweb"; // Change to your database name
+$dbname = "wiseweb"; 
 
 $conn = mysqli_connect($host, $user, $pass, $wiseweb);
 

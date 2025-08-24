@@ -7,58 +7,96 @@
 </head>
 <body>
 
-  <header>
-    WiseWeb Admin Dashboard
-  </header>
-
-  <nav>
-    <a href="admin-dashboard.html">Home</a>
-    <a href="manage-students.php">Manage Students</a>
-    <a href="manage-admins.php">Manage Admins</a>
-    <a href="view-logs.php">System Logs</a>
-    <a href="logout.php">Logout</a>
-  </nav>
-
-  <div class="container">
-    <h1>Welcome, Admin</h1>
-    <p>Here are your WiseWeb management tools:</p>
-
-    <div class="cards">
-      <div class="card">
-        <h2>Manage Students</h2>
-        <p>Add, edit, or remove student accounts.</p>
-        <a href="manage-students.php">Go →</a>
-      </div>
-
-      <div class="card">
-        <h2>Manage Admins</h2>
-        <p>Control admin accounts and permissions.</p>
-        <a href="manage-admins.php">Go →</a>
-      </div>
-
-      <div class="card">
-        <h2>System Logs</h2>
-        <p>Track login activity and important events.</p>
-        <a href="view-logs.php">Go →</a>
-      </div>
-
-      <div class="card">
-        <h2> Messages</h2>
-        <p>View and respond to messages in the system.</p>
-        <a href="messages.php">Go →</a>
-      </div>
-
-      <div class="card">
-        <h2> Settings</h2>
-        <p>Update WiseWeb system configurations.</p>
-        <a href="settings.php">Go →</a>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">WiseWeb Admin</div>
+      <div class="nav-links">
+        <a href="admin-dashboard.html" class="active">Dashboard</a>
+        <a href="manage-students.php">Manage Students</a>
+        <a href="view-logs.php">System Logs</a>
+        <a href="messages.php">Messages</a>
+        <a href="settings.php">Settings</a>
+        <a href="logout.php">Logout</a>
       </div>
     </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-container">
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+      <h1>Welcome, Admin</h1>
+      <p>Your WiseWeb management panel</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" data-target="150">0</div>
+        <div class="stat-label">Total Students</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="5">0</div>
+        <div class="stat-label">Admins</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="42">0</div>
+        <div class="stat-label">Messages</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="97">0</div>
+        <div class="stat-label">System Uptime %</div>
+      </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="content-grid">
+      <!-- Recent Activity -->
+      <div class="content-card">
+        <div class="card-header">
+          <h3 class="card-title">Recent Activity</h3>
+        </div>
+        <ul class="item-list">
+          <li>No recent activity</li>
+        </ul>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="content-card">
+        <div class="card-header">
+          <h3 class="card-title">Quick Actions</h3>
+        </div>
+        <button class="btn btn-success">Add Student</button>
+        <button class="btn btn-secondary">Add Admin</button>
+        <button class="btn">Generate Report</button>
+      </div>
+    </div>
+
   </div>
 
-  <footer>
-    &copy; 2025 WiseWeb | Admin Panel
-  </footer>
+  <!-- Count-Up Animation -->
+  <script>
+    const counters = document.querySelectorAll('.stat-number');
+    const speed = 200;
+
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = Math.ceil(target / speed);
+
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  </script>
 
 </body>
 </html>
